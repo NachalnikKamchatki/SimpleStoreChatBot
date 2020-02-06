@@ -1,4 +1,6 @@
 from misc import TOKEN, STORES
+from dialog_flow_bot import text_message
+
 import telebot
 from telebot.types import Message, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 
@@ -65,7 +67,7 @@ def echo_all(message: Message):
                      f'Банковский перевод\n',
                      reply_markup=main_menu)
     else:
-        bot.reply_to(message, f'{message.from_user.first_name}, такая команда "{message.text}" мне неизвестна :(',
+        bot.reply_to(message, f'{message.from_user.first_name}, {text_message(message.text)}',
                      reply_markup=main_menu)
 
 
