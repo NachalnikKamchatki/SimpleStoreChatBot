@@ -78,10 +78,11 @@ fabric.properties
 
 misc.py
 
- .idea/GeekTelebot.iml
- .idea/inspectionProfiles/profiles_settings.xml
- .idea/misc.xml
- .idea/modules.xml
- .idea/vcs.xml
- __pycache__/misc.cpython-38.pyc
- new file:   bot.py
+.idea/GeekTelebot.iml
+.idea/inspectionProfiles/profiles_settings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+__pycache__/**
+__pycache__/misc.cpython-38.pyc
+new file:   bot.py
