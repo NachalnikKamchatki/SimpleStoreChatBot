@@ -1,0 +1,9 @@
+certifi==2019.11.28
+chardet==3.0.4
+geographiclib==1.50
+geopy==1.20.0
+idna==2.8
+pyTelegramBotAPI==3.6.7
+requests==2.22.0
+six==1.14.0
+urllib3==1.25.8
