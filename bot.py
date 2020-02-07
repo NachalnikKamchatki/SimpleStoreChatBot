@@ -8,6 +8,7 @@ from geopy.distance import distance
 
 
 bot = telebot.TeleBot(TOKEN)
+global sorted_distances
 
 # Создание основного меню
 main_buttons = {
@@ -38,6 +39,7 @@ def send_welcome(message: Message):
 def store_location(message: Message):
     user_lon = message.location.longitude
     user_lat = message.location.latitude
+    global sorted_distances
     sorted_distances = get_distances(user_lat, user_lon)
     bot.send_message(
         message.chat.id,
@@ -71,10 +73,13 @@ def echo_all(message: Message):
                      reply_markup=main_menu)
 
 
-@bot.callback_query_handler(func=lambda message: True)
+@bot.callback_query_handler(func=lambda call: True)
 def callback_others_stores(call):
+
     if call.data == 'stores':
-        bot.send_message(call.message.chat.id, text=f'{[store["title"] for store in STORES]}')
+        others_stores_locations = sorted_distances[1:]
+        for store in others_stores_locations:
+            bot.send_message(call.message.chat.id, text=f'{store[0]}: {round(store[1][0], 3)} км.')
 
 
 # Получаем отсортированный список с расстояниями от пользователя до всех магазинов в списке.
@@ -89,13 +94,13 @@ def get_distances(user_lat, user_lon):
         )
 
     list_distances = list(distances.items())
-    sorted_distances = sorted(list_distances, key=lambda x: x[1][0])
-    return sorted_distances
+    srt_distances = sorted(list_distances, key=lambda x: x[1][0])
+    return srt_distances
 
 
 def main():
     # запускаем бота
-    bot.polling(timeout=60)
+    bot.polling(timeout=80)
 
 
 if __name__ == '__main__':
